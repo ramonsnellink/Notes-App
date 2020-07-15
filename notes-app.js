@@ -36,3 +36,13 @@ window.addEventListener("storage", function (e) {
     renderNotes(notes, filters);
   }
 });
+
+const now = moment();
+now.subtract(1, "week").subtract(20, "days");
+console.log(now.format("MMMM Qo, YYYY"));
+console.log(now.fromNow());
+const nowTimestamp = now.valueOf();
+console.log(nowTimestamp);
+
+console.log(moment(nowTimestamp).toString());
+// November 3rd, 2003
