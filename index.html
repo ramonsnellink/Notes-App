@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Notes App</title>
+    <meta name="description" content="Notes App" />
+    <meta name="author" content="Ramon" />
+  </head>
+  <body>
+    <h1>Dit is een notitie APP</h1>
+    <h2>Als oefenproject</h2>
+    <input id="searchtext" type="text" placeholder="Filter notes" />
+    <select id="filter-by">
+      <option value="byEdited">Sort by last edited</option>
+      <option value="byCreated">Sort by recently created</option>
+      <option value="byAlphabet">Sort alphabetically</option>
+    </select>
+    <div id="notes"></div>
+    <button id="create-note">Create Note</button>
+    <script src="uuidv4.js"></script>
+    <script src="notes-functions.js"></script>
+    <script src="notes-app.js"></script>
+  </body>
+</html>
