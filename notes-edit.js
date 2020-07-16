@@ -1,7 +1,3 @@
-// Add a DOM Element between title and body inputs (empty span)
-// Set text value: Last edited 4 hours ago
-// Update value on title/body/storage change
-
 const titleElement = document.querySelector("#note-title");
 const bodyElement = document.querySelector("#note-body");
 const removeElement = document.querySelector("#remove-note");

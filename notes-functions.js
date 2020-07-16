@@ -52,6 +52,44 @@ const generateNoteDom = function (note) {
   return noteEl;
 };
 
+//Notes sorteren
+const sortNotes = function (notes, sortBy) {
+  if (sortBy === "byEdited") {
+    // sort vergelijkt 2 items, a en b
+    return notes.sort(function (a, b) {
+      //check timestamps
+      if (a.updatedAt > b.updatedAt) {
+        return -1;
+      } else if (a.updatedAt < b.updatedAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (sortBy === "byCreated") {
+    return notes.sort(function (a, b) {
+      if (a.createdAt > b.createdAt) {
+        return -1;
+      } else if (a.createdAt < b.createdAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (sortBy === "byAlphabet") {
+    return notes.sort(function (a, b) {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+      } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else {
+    return notes;
+  }
+};
 // Render application notes
 // render de lijst van notes. Hier voert hij de de array in, en het filters object.
 //maak een nieuwe array met de gefilterede notes
@@ -60,6 +98,7 @@ const generateNoteDom = function (note) {
 // voor elk array item, maar een nieuwe P met textContent van note.title
 
 const renderNotes = function (notes, filters) {
+  notes = sortNotes(notes, filters.sortBy);
   const filtereredNotes = notes.filter(function (note) {
     return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
   });

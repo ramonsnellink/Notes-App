@@ -3,6 +3,7 @@ let notes = getSavedNotes();
 
 const filters = {
   searchText: "",
+  sortBy: "byEdited",
 };
 // render in ieder geval 1 keer de notes array
 renderNotes(notes, filters);
@@ -30,7 +31,8 @@ document.querySelector("#searchtext").addEventListener("input", function (e) {
 });
 
 document.querySelector("#filter-by").addEventListener("change", function (e) {
-  console.log(e.target.value);
+  filters.sortBy = e.target.value;
+  renderNotes(notes, filters);
 });
 
 window.addEventListener("storage", function (e) {
