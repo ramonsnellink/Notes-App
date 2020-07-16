@@ -69,3 +69,9 @@ const renderNotes = function (notes, filters) {
     document.querySelector("#notes").appendChild(noteEl);
   });
 };
+
+// Maak een Last edited bericht met timestamp geconverteerd naar xx tijd ago
+
+const generateLastEdited = function (timestamp) {
+  return `Last edited: ${moment(timestamp).fromNow()}`;
+};

@@ -10,6 +10,7 @@ renderNotes(notes, filters);
 // Selecter de input, luister naar input en geef dat een parameter van e
 // assign het event aan het filters.searchText object.
 // render de notes array opnieuw maar dan gefiltered, tijdens het typen.
+const timestamp = moment().valueOf();
 
 document.querySelector("#create-note").addEventListener("click", function (e) {
   const id = uuidv4();
@@ -17,6 +18,8 @@ document.querySelector("#create-note").addEventListener("click", function (e) {
     id: id,
     title: "",
     body: "",
+    createdAt: timestamp,
+    updatedAt: timestamp,
   });
   saveNotes(notes);
   location.assign(`./edit.html#${id}`);
@@ -36,13 +39,6 @@ window.addEventListener("storage", function (e) {
     renderNotes(notes, filters);
   }
 });
-
-const now = moment();
-now.subtract(1, "week").subtract(20, "days");
-console.log(now.format("MMMM Qo, YYYY"));
-console.log(now.fromNow());
-const nowTimestamp = now.valueOf();
-console.log(nowTimestamp);
-
-console.log(moment(nowTimestamp).toString());
-// November 3rd, 2003
+// Add createdAt and updatedAt to the new notes (story timestamp)
+// update updatedAt when someone edits a title or body
+// delete all old notes before testing
