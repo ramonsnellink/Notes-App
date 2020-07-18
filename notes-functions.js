@@ -1,5 +1,5 @@
 // Check for existing saved data
-const getSavedNotes = function () {
+const getSavedNotes = () => {
   const notesJSON = localStorage.getItem("notes");
 
   if (notesJSON !== null) {
@@ -9,23 +9,21 @@ const getSavedNotes = function () {
   }
 };
 
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
   localStorage.setItem("notes", JSON.stringify(notes));
 };
 
 //remove a note from the list
 
-const removeNote = function (id) {
-  const noteIndex = notes.findIndex(function (note) {
-    return note.id === id;
-  });
+const removeNote = (id) => {
+  const noteIndex = notes.findIndex((note) => note.id === id);
   if (noteIndex > -1) {
     notes.splice(noteIndex, 1);
   }
 };
 
 // Generate the DOM structure for a Note
-const generateNoteDom = function (note) {
+const generateNoteDom = (note) => {
   const noteEl = document.createElement("div");
   const textEl = document.createElement("a");
   const button = document.createElement("button");
@@ -33,7 +31,7 @@ const generateNoteDom = function (note) {
   // maak button met text "x"
   button.textContent = "x";
   noteEl.appendChild(button);
-  button.addEventListener("click", function () {
+  button.addEventListener("click", () => {
     removeNote(note.id);
     saveNotes(notes);
     renderNotes(notes, filters);
@@ -53,10 +51,10 @@ const generateNoteDom = function (note) {
 };
 
 //Notes sorteren
-const sortNotes = function (notes, sortBy) {
+const sortNotes = (notes, sortBy) => {
   if (sortBy === "byEdited") {
     // sort vergelijkt 2 items, a en b
-    return notes.sort(function (a, b) {
+    return notes.sort((a, b) => {
       //check timestamps
       if (a.updatedAt > b.updatedAt) {
         return -1;
@@ -67,7 +65,7 @@ const sortNotes = function (notes, sortBy) {
       }
     });
   } else if (sortBy === "byCreated") {
-    return notes.sort(function (a, b) {
+    return notes.sort((a, b) => {
       if (a.createdAt > b.createdAt) {
         return -1;
       } else if (a.createdAt < b.createdAt) {
@@ -77,7 +75,7 @@ const sortNotes = function (notes, sortBy) {
       }
     });
   } else if (sortBy === "byAlphabet") {
-    return notes.sort(function (a, b) {
+    return notes.sort((a, b) => {
       if (a.title.toLowerCase() < b.title.toLowerCase()) {
         return -1;
       } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
@@ -97,13 +95,11 @@ const sortNotes = function (notes, sortBy) {
 //clear de div tijdens het typen
 // voor elk array item, maar een nieuwe P met textContent van note.title
 
-const renderNotes = function (notes, filters) {
+const renderNotes = (notes, filters) => {
   notes = sortNotes(notes, filters.sortBy);
-  const filtereredNotes = notes.filter(function (note) {
-    return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
-  });
+  const filtereredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()));
   document.querySelector("#notes").innerHTML = "";
-  filtereredNotes.forEach(function (note) {
+  filtereredNotes.forEach((note) => {
     const noteEl = generateNoteDom(note);
     document.querySelector("#notes").appendChild(noteEl);
   });
@@ -111,6 +107,4 @@ const renderNotes = function (notes, filters) {
 
 // Maak een Last edited bericht met timestamp geconverteerd naar xx tijd ago
 
-const generateLastEdited = function (timestamp) {
-  return `Last edited: ${moment(timestamp).fromNow()}`;
-};
+const generateLastEdited = (timestamp) => `Last edited: ${moment(timestamp).fromNow()}`;

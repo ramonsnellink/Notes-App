@@ -6,9 +6,7 @@ const noteId = location.hash.substring(1);
 
 let notes = getSavedNotes();
 //check of de hash overeenkomt met een ID van een individuele note
-let note = notes.find(function (note) {
-  return note.id === noteId;
-});
+let note = notes.find((note) => note.id === noteId);
 
 // als note leeg is (dus niet true), dan stuur terug naar index.html
 if (note === undefined) {
@@ -25,7 +23,7 @@ updatedElement.textContent = generateLastEdited(note.updatedAt);
 
 // Luister naar events en sla veranderingen op
 
-titleElement.addEventListener("input", function (e) {
+titleElement.addEventListener("input", (e) => {
   note.title = e.target.value;
   // roep hier pas moment aan, anders als je het al eerder definieerd dan pakt hij die tijd.
   note.updatedAt = moment().valueOf();
@@ -33,7 +31,7 @@ titleElement.addEventListener("input", function (e) {
   saveNotes(notes);
 });
 
-bodyElement.addEventListener("input", function (e) {
+bodyElement.addEventListener("input", (e) => {
   note.body = e.target.value;
   note.updatedAt = moment().valueOf();
   updatedElement.textContent = generateLastEdited(note.updatedAt);
@@ -41,21 +39,19 @@ bodyElement.addEventListener("input", function (e) {
 });
 
 //Luister naar klik op remove button
-removeElement.addEventListener("click", function (e) {
+removeElement.addEventListener("click", (e) => {
   removeNote(note.id);
   saveNotes(notes);
   location.assign("./index.html");
 });
 
 //Realtime updaten
-window.addEventListener("storage", function (e) {
+window.addEventListener("storage", (e) => {
   if (e.key === "notes") {
     //assign de nieuwe waarde en parse het
     notes = JSON.parse(e.newValue);
   }
-  let note = notes.find(function (note) {
-    return note.id === noteId;
-  });
+  let note = notes.find((note) => note.id === noteId);
 
   // als note leeg is (dus niet true), dan stuur terug naar index.html
   if (note === undefined) {
