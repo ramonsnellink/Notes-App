@@ -9,7 +9,7 @@ let notes = getSavedNotes();
 let note = notes.find((note) => note.id === noteId);
 
 // als note leeg is (dus niet true), dan stuur terug naar index.html
-if (note === undefined) {
+if (!note) {
   location.assign("./index.html");
 }
 
@@ -54,7 +54,7 @@ window.addEventListener("storage", (e) => {
   let note = notes.find((note) => note.id === noteId);
 
   // als note leeg is (dus niet true), dan stuur terug naar index.html
-  if (note === undefined) {
+  if (!note) {
     location.assign("./index.html");
   }
 
