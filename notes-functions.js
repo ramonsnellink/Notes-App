@@ -1,7 +1,14 @@
-// Check for existing saved data
+"use strict";
+
+// zet de data in localstorage
 const getSavedNotes = () => {
   const notesJSON = localStorage.getItem("notes");
-  return notesJSON ? JSON.parse(notesJSON) : [];
+  // check of er data is. Is de data incorrect? Maak dan een nieuwe array
+  try {
+    return notesJSON ? JSON.parse(notesJSON) : [];
+  } catch (e) {
+    return [];
+  }
 };
 
 const saveNotes = (notes) => {

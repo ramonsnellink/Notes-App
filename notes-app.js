@@ -1,3 +1,5 @@
+"use strict";
+
 //Leeg object waar je de input in opslaat
 let notes = getSavedNotes();
 
