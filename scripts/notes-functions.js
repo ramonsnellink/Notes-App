@@ -26,18 +26,9 @@ const removeNote = (id) => {
 
 // Generate the DOM structure for a Note
 const generateNoteDom = (note) => {
-  const noteEl = document.createElement("div");
-  const textEl = document.createElement("a");
-  const button = document.createElement("button");
-
-  // maak button met text "x"
-  button.textContent = "x";
-  noteEl.appendChild(button);
-  button.addEventListener("click", () => {
-    removeNote(note.id);
-    saveNotes(notes);
-    renderNotes(notes, filters);
-  });
+  const noteEl = document.createElement("a");
+  const textEl = document.createElement("p");
+  const statusEl = document.createElement("p");
 
   // maak span met note text
   if (note.title.length > 0) {
@@ -45,9 +36,16 @@ const generateNoteDom = (note) => {
   } else {
     textEl.textContent = "Unnamed Note";
   }
-  textEl.setAttribute("href", `./edit.html#${note.id}`);
+
+  textEl.classList.add("list-item__title");
 
   noteEl.appendChild(textEl);
+  noteEl.setAttribute("href", `./edit.html#${note.id}`);
+  noteEl.classList.add("list-item");
+
+  statusEl.textContent = generateLastEdited(note.updatedAt);
+  statusEl.classList.add("list-item__subtitle");
+  noteEl.appendChild(statusEl);
 
   return noteEl;
 };
@@ -98,13 +96,24 @@ const sortNotes = (notes, sortBy) => {
 // voor elk array item, maar een nieuwe P met textContent van note.title
 
 const renderNotes = (notes, filters) => {
+  const notesEl = document.querySelector("#notes");
+
   notes = sortNotes(notes, filters.sortBy);
   const filtereredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()));
-  document.querySelector("#notes").innerHTML = "";
-  filtereredNotes.forEach((note) => {
-    const noteEl = generateNoteDom(note);
-    document.querySelector("#notes").appendChild(noteEl);
-  });
+
+  notesEl.innerHTML = "";
+
+  if (filtereredNotes.length > 0) {
+    filtereredNotes.forEach((note) => {
+      const noteEl = generateNoteDom(note);
+      notesEl.appendChild(noteEl);
+    });
+  } else {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.textContent = "No notes to show";
+    emptyMessage.classList.add("empty-message");
+    notesEl.appendChild(emptyMessage);
+  }
 };
 
 // Maak een Last edited bericht met timestamp geconverteerd naar xx tijd ago

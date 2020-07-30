@@ -5,15 +5,31 @@
     <title>Edit Note</title>
     <meta name="description" content="Edit Note" />
     <meta name="author" content="Ramon" />
+    <link href="./styles/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <a href="./index.html">Back Home</a>
-    <input id="note-title" placeholder="Note Title" />
-    <span id="note-updated"></span>
-    <textarea id="note-body" placeholder="Enter note Text"></textarea>
-    <button id="remove-note">Remove Note</button>
+    <div class="header">
+      <div class="container">
+        <h1 class="header__title">Dit is een notitie APP</h1>
+        <h2 class="header__subtitle">Als oefenproject</h2>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="actions__container actions__container--spaced">
+        <a href="./index.html">Back Home</a>
+        <span id="note-updated"></span>
+      </div>
+    </div>
+
+    <div class="container">
+      <input id="note-title" class="title-input" placeholder="Note Title" />
+      <textarea id="note-body" class="body-input" placeholder="Enter note Text"></textarea>
+      <button id="remove-note" class="button button--secondary">Remove Note</button>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
-    <script src="notes-functions.js"></script>
-    <script src="notes-edit.js"></script>
+    <script src="./scripts/notes-functions.js"></script>
+    <script src="./scripts/notes-edit.js"></script>
   </body>
 </html>
